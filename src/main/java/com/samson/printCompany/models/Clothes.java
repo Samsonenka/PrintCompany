@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Clothes {
@@ -19,17 +20,29 @@ public class Clothes {
     private String clothesBrand;
     @NotNull
     private String clothesSize;
+    private String clothesColor;
     @NotNull
     private int clothesQuantity;
 
     public Clothes() {
     }
 
-    public Clothes(@NotNull String clothesName, @NotNull String clothesBrand, @NotNull String clothesSize, @NotNull int clothesQuantity) {
+    public Clothes(@NotNull String clothesName, @NotNull String clothesBrand,
+                   @NotNull String clothesSize, @NotNull String clothesColor,
+                   @NotNull int clothesQuantity) {
         this.clothesName = clothesName;
         this.clothesBrand = clothesBrand;
         this.clothesSize = clothesSize;
+        this.clothesColor = clothesColor;
         this.clothesQuantity = clothesQuantity;
+    }
+
+    public String getClothesColor() {
+        return clothesColor;
+    }
+
+    public void setClothesColor(String clothesColor) {
+        this.clothesColor = clothesColor;
     }
 
     public int getClothesID() {
@@ -67,4 +80,6 @@ public class Clothes {
     public void setClothesQuantity(int clothesQuantity) {
         this.clothesQuantity = clothesQuantity;
     }
+
+
 }
