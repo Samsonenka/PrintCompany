@@ -33,7 +33,7 @@ public class ClothesController {
     @PostMapping("/add")
     public String addClothes(Clothes clothes, ModelMap modelMap){
 
-        Clothes newClothes = clothesRepo.addClothes(clothesRepo.findAll(), clothes);
+        Clothes newClothes = clothes.addClothes(clothesRepo.findAll());
 
         Arrival arrival = new Arrival(clothes);
 

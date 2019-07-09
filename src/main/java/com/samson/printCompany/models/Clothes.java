@@ -82,4 +82,21 @@ public class Clothes {
     }
 
 
+    public Clothes addClothes(List<Clothes> all) {
+
+        for (Clothes value: all){
+            if (value.getClothesName().equals(clothesName)){
+                if (value.getClothesBrand().equals(clothesBrand)){
+                    if (value.getClothesSize().equals(clothesSize)){
+                        if (value.getClothesColor().equals(clothesColor)){
+                            value.setClothesQuantity(value.getClothesQuantity() + clothesQuantity);
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+
+        return this;
+    }
 }
