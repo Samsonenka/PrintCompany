@@ -1,4 +1,4 @@
-package com.samson.printCompany.models;
+package com.samson.printCompany.models.enums;
 
 public enum Size {
 

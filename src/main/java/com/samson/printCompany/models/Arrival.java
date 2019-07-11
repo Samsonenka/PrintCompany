@@ -1,12 +1,13 @@
 package com.samson.printCompany.models;
 
+import com.samson.printCompany.models.enums.Status;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Arrival {
@@ -40,7 +41,7 @@ public class Arrival {
         this.clothesQuantity = clothes.getClothesQuantity();
         this.clothesColor = clothes.getClothesColor();
         this.arrivalDate = LocalDate.now();
-        this.arrivalStatus = "arrival";
+        arrivalStatus = Status.arrival.toString();
     }
 
     public String getArrivalStatus() {

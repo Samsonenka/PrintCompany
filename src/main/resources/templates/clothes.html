@@ -15,7 +15,25 @@
 
 <div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Dodaj produkt</button>
+
     <a th:href="@{'/clothes/history'}"><button type="button" class="btn btn-primary">Historia operacji</button></a>
+</div>
+
+<div class="col-sm-3 px-0 my-3">
+    <form th:action="@{/clothes/filter}" method="get">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="submit">Button</button>
+            </div>
+            <select name="clothesSize" class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                <option selected>Wybierz rozmiar</option>
+                <option th:each="size : ${size}"
+                        th:value="${size}"
+                        th:utext="${size}">
+                </option>
+            </select>
+        </div>
+    </form>
 </div>
 
 <div class="text-center mb-3 text-uppercase">
@@ -56,7 +74,7 @@
                         <div class="my-2"><input required  type="text" name="clothesName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>
                         <div class="my-2"><input required type="text" name="clothesBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
                         <select name="clothesSize" class="custom-select my-1" required>
-                            <option selected>Rozmiar</option>
+                            <option selected>Wybierz rozmiar</option>
                             <option th:each="size : ${size}"
                                     th:value="${size}"
                                     th:utext="${size}">
