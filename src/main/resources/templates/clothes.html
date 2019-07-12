@@ -13,27 +13,10 @@
 </head>
 <body class="bg-light px-5 py-3">
 
-<div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Dodaj produkt</button>
-
-    <a th:href="@{'/clothes/history'}"><button type="button" class="btn btn-primary">Historia operacji</button></a>
-</div>
-
-<div class="col-sm-3 px-0 my-3">
-    <form th:action="@{/clothes/filter}" method="get">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="submit">Button</button>
-            </div>
-            <select name="clothesSize" class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                <option selected>Wybierz rozmiar</option>
-                <option th:each="size : ${size}"
-                        th:value="${size}"
-                        th:utext="${size}">
-                </option>
-            </select>
-        </div>
-    </form>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Dodaj produkt</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/history';return false;">Historia operacji</button>
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
 </div>
 
 <div class="text-center mb-3 text-uppercase">
@@ -59,7 +42,8 @@
     </table>
 </div>
 
-
+<!--model addClothes-->
+<!--***************************************************-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -88,6 +72,35 @@
         </div>
     </div>
 </div>
+<!--***************************************************-->
+
+<!--model filter-->
+<!--***************************************************-->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filtruj według rozmiaru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/clothes/filter}" method="get">
+                    <select name="clothesSize" class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                        <option selected>Wybierz rozmiar</option>
+                        <option th:each="size : ${size}"
+                                th:value="${size}"
+                                th:utext="${size}">
+                        </option>
+                    </select>
+                    <button  class="btn btn-primary my-2" type="submit">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--***************************************************-->
 
 </body>
 </html>
