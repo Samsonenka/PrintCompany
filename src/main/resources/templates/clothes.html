@@ -13,18 +13,26 @@
 </head>
 <body class="bg-light px-5 py-3">
 
-<div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Dodaj produkt</button>
-    <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/history';return false;">Historia operacji</button>
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
-</div>
+<nav class="navbar navbar-light bg-light border-bottom">
+    <a class="navbar-brand" th:href="@{/}">
+        <img th:src="@{'/img/logoprint.png'}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Print Company
+    </a>
 
-<div class="text-center mb-3 text-uppercase">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Dodaj produkt</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/history';return false;">Historia operacji</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
+    </div>
+</nav>
+
+
+
+<div class="text-center my-3 text-uppercase">
     <h3>Magazyn</h3>
 </div>
 
 <div>
-    <table class="table table-hover">
+    <table class="table table-sm">
         <tr>
             <th scope="col">Typ</th>
             <th scope="col">Firma</th>
