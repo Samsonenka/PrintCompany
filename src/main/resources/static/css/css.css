@@ -1,0 +1,11 @@
+.demo6 {
+    background-image: -webkit-linear-gradient(45deg, #2ba0db 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #2ba0db 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 250%;
+    transition: all 700ms linear 0ms;
+}
+.demo6:hover {
+    background-position: 0;
+    transition: background-position 700ms linear 0ms;
+}
