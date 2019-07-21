@@ -48,17 +48,6 @@ public class ClothesController {
         return "redirect:/clothes/showAll";
     }
 
-    @GetMapping("/history")
-    public String showHistory(ModelMap modelMap){
-
-        List<Arrival> arrivalList = arrivalRepo.findAll();
-        Collections.reverse(arrivalList);
-
-        modelMap.put("history", arrivalList);
-
-        return "history";
-    }
-
     @GetMapping("/filter")
     public String filterClothes(@RequestParam String clothesSize, ModelMap modelMap){
 

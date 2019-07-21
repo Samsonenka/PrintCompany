@@ -13,14 +13,24 @@
 </head>
 <body class="bg-light px-5 py-3">
 
+<nav class="navbar navbar-light bg-light border-bottom">
+    <a class="navbar-brand" th:href="@{/}">
+        <img th:src="@{'/img/logoprint.png'}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Print Company
+    </a>
 
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/showAll';return false;">Magazyn</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
+    </div>
+
+</nav>
 
 <div class="text-center mb-3 text-uppercase">
     <h3>Operacje</h3>
 </div>
 
 <div>
-    <table class="table table-hover">
+    <table class="table table-sm">
         <tr>
             <th scope="col">Firma</th>
             <th scope="col">Typ</th>
@@ -32,13 +42,36 @@
             <td th:utext="${arrival.companyName}">...</td>
             <td th:utext="${arrival.clothesName}">...</td>
             <td th:utext="${arrival.clothesQuantity}">...</td>
-            <td th:utext="${arrival.arrivalDate}">...</td>
+            <td th:utext="${#dates.format(arrival.arrivalDate, 'dd-MMM-yyyy')}">...</td>
+
             <td>
                 <img th:src="@{'/img/' + ${arrival.arrivalStatus} + '.png'}">
             </td>
             </tr>
     </table>
 </div>
+
+<!--model filter-->
+<!--***************************************************-->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filtruj według daty</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/history/filter}" method="get">
+                    <div class="my-2"><input required  type="date" name="date" class="form-control" placeholder="Data" aria-describedby="button-addon2"/></div>
+                    <button  class="btn btn-primary my-2" type="submit">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--***************************************************-->
 
 
 </body>
