@@ -20,6 +20,7 @@ public class Clothes {
     private String clothesBrand;
     @NotNull
     private String clothesSize;
+    @NotNull
     private String clothesColor;
     @NotNull
     private int clothesQuantity;
