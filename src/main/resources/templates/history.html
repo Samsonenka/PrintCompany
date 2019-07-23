@@ -42,8 +42,7 @@
             <td th:utext="${arrival.companyName}">...</td>
             <td th:utext="${arrival.clothesName}">...</td>
             <td th:utext="${arrival.clothesQuantity}">...</td>
-            <td th:utext="${#dates.format(arrival.arrivalDate, 'dd-MMM-yyyy')}">...</td>
-
+            <td th:utext="${arrival.arrivalDate}">...</td>
             <td>
                 <img th:src="@{'/img/' + ${arrival.arrivalStatus} + '.png'}">
             </td>

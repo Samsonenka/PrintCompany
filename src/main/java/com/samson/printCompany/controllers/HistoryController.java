@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,7 @@ public class HistoryController {
     }
 
     @GetMapping("/filter")
-    public String filterHistory(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, ModelMap modelMap){
+    public String filterHistory(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, ModelMap modelMap){
 
         FilterList filterList = new FilterList();
         List<Arrival> arrivalList = filterList.filterListByDate(arrivalRepo.findAll(), date);

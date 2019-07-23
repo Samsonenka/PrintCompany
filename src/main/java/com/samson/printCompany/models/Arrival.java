@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,7 +29,7 @@ public class Arrival {
     @NotNull
     private int clothesQuantity;
     @NotNull
-    private Date arrivalDate;
+    private LocalDate arrivalDate;
     private String arrivalStatus;
 
     public Arrival() {
@@ -41,7 +42,7 @@ public class Arrival {
         this.clothesSize = clothes.getClothesSize();
         this.clothesQuantity = clothes.getClothesQuantity();
         this.clothesColor = clothes.getClothesColor();
-        this.arrivalDate = new java.util.Date();
+        this.arrivalDate = LocalDate.now();
         arrivalStatus = Status.arrival.toString();
     }
 
@@ -93,11 +94,11 @@ public class Arrival {
         this.clothesQuantity = clothesQuantity;
     }
 
-    public Date getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 }

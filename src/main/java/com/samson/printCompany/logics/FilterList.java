@@ -2,12 +2,8 @@ package com.samson.printCompany.logics;
 
 import com.samson.printCompany.models.Arrival;
 import com.samson.printCompany.models.Clothes;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FilterList {
@@ -27,17 +23,18 @@ public class FilterList {
         return clothesList;
     }
 
-    public List<Arrival> filterListByDate(List<Arrival> arrivalList, Date date) {
+    public List<Arrival> filterListByDate(List<Arrival> arrivalList, LocalDate date) {
 
-        System.out.println(date);
+        for (int i = 0; i < arrivalList.size(); i++){
 
-        for (Arrival arrival: arrivalList){
+            Arrival arrival = arrivalList.get(i);
 
-                System.out.println(arrival.getArrivalDate());
-
+            if (!arrival.getArrivalDate().isBefore(date) && !arrival.getArrivalDate().isAfter(date)){
+                arrivalList.remove(arrivalList.get(i));
+                arrivalList.add(0, arrival);
             }
-
-        return null;
+        }
+        return arrivalList;
     }
 
 }
