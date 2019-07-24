@@ -32,7 +32,7 @@ public class Orders {
 
     public Orders(@NotNull String orderNumber, @NotNull String orderCompanyName,
                   @NotNull String orderCompanyAddress, @NotNull LocalDate orderDate,
-                  @NotNull String orderComments, @NotNull double orderPrice) {
+                  @NotNull String orderComments) {
         this.orderNumber = orderNumber;
         this.orderCompanyName = orderCompanyName;
         this.orderCompanyAddress = orderCompanyAddress;
