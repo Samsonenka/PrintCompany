@@ -16,7 +16,6 @@ public class OrderController {
     @GetMapping("/showAll")
     public String showOrders(ModelMap modelMap){
 
-
         modelMap.put("orders", orderRepo.findAll());
 
         return "orders";

@@ -35,6 +35,7 @@
     <div class="card mb-2" style="width: 50rem;" th:each ="orders : ${orders}">
         <div class="card-body">
             <h5 class="card-title" th:utext="${orders.orderCompanyName}"></h5>
+            <h5 class="card-title" th:utext="${orders.orderNumber}"></h5>
         </div>
     </div>
 
