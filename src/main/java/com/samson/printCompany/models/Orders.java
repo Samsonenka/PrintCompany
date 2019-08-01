@@ -35,6 +35,7 @@ public class Orders {
     public Orders(@NotNull String orderCompanyName,
                   @NotNull String orderCompanyAddress,
                   @NotNull String orderComments) {
+
         this.orderCompanyName = orderCompanyName.toUpperCase();
         this.orderCompanyAddress = orderCompanyAddress.toUpperCase();
         this.orderDate = LocalDate.now();
@@ -43,7 +44,7 @@ public class Orders {
         this.orderPrice = 0;
     }
 
-    public String createOrderNumber(LocalDate orderDate, String orderCompanyName, String orderCompanyAddress){
+    private String createOrderNumber(LocalDate orderDate, String orderCompanyName, String orderCompanyAddress){
 
         String date = orderDate.format(DateTimeFormatter.BASIC_ISO_DATE).substring(4);
         String randomNumbers = createRandomNumber();
@@ -53,7 +54,7 @@ public class Orders {
         return "" + date + "" + randomNumbers + "" + companyName + "" + companyAddress;
     }
 
-    public String createRandomNumber(){
+    private String createRandomNumber(){
 
         Random rand = new Random();
 

@@ -9,3 +9,11 @@
     background-position: 0;
     transition: background-position 700ms linear 0ms;
 }
+
+.rowDiv {
+    opacity: 1;
+}
+
+.rowDiv:hover {
+    opacity: 0.7;
+}
