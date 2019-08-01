@@ -39,8 +39,19 @@ public class OrderController {
     @GetMapping("/addproduct/{orderID}")
     public String addProduct(@PathVariable int orderID, ModelMap modelMap){
 
-        modelMap.put("orders", orderRepo.findAll());
+        Orders order = orderRepo.findById(orderID).get();
 
-        return "orders";
+        modelMap.put("order", order);
+        modelMap.put("orderID", order.getOrderID());
+
+        return "consumption";
+    }
+
+    @PostMapping("/saveproduct/{orderID}")
+    public String saveProduct(@PathVariable int orderID, ModelMap modelMap){
+
+        modelMap.put("orderID", orderID);
+
+        return "consumption";
     }
 }
