@@ -2,7 +2,7 @@ package com.samson.printCompany.controllers;
 
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.Arrival;
-import com.samson.printCompany.models.Clothes;
+import com.samson.printCompany.models.Stock;
 import com.samson.printCompany.models.enums.Size;
 import com.samson.printCompany.repos.ArrivalRepo;
 import com.samson.printCompany.repos.ClothesRepo;
@@ -18,7 +18,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/clothes/")
-public class ClothesController {
+public class StockController {
 
     @Autowired
     private ClothesRepo clothesRepo;
@@ -35,9 +35,9 @@ public class ClothesController {
     }
 
     @PostMapping("/add")
-    public String addClothes(Clothes clothes, ModelMap modelMap){
+    public String addClothes(Stock clothes, ModelMap modelMap){
 
-        Clothes newClothes = clothes.addClothes(clothesRepo.findAll());
+        Stock newClothes = clothes.addClothes(clothesRepo.findAll());
         Arrival arrival = new Arrival(clothes);
 
         arrivalRepo.save(arrival);
@@ -52,7 +52,7 @@ public class ClothesController {
     public String filterClothes(@RequestParam String clothesSize, ModelMap modelMap){
 
         FilterList filterList = new FilterList();
-        List<Clothes> clothesList = filterList.filterListBySize(clothesRepo.findAll(), clothesSize);
+        List<Stock> clothesList = filterList.filterListBySize(clothesRepo.findAll(), clothesSize);
 
         modelMap.put("clothes", clothesList);
         modelMap.put("size", Size.values());

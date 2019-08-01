@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Arrival {
@@ -35,7 +33,7 @@ public class Arrival {
     public Arrival() {
     }
 
-    public Arrival(Clothes clothes) {
+    public Arrival(Stock clothes) {
 
         this.companyName = clothes.getClothesBrand();
         this.clothesName = clothes.getClothesName();

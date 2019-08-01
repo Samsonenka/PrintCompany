@@ -1,10 +1,9 @@
 package com.samson.printCompany.repos;
 
-import com.samson.printCompany.models.Stock;
+import com.samson.printCompany.models.Consumption;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClothesRepo extends JpaRepository<Stock, Integer> {
-
+public interface ConsumptionRepo extends JpaRepository<Consumption, Integer> {
 }

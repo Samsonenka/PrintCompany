@@ -1,7 +1,7 @@
 package com.samson.printCompany.logics;
 
 import com.samson.printCompany.models.Arrival;
-import com.samson.printCompany.models.Clothes;
+import com.samson.printCompany.models.Stock;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 public class FilterList {
 
 
-    public List<Clothes> filterListBySize(List<Clothes> clothesList, String clothesSize) {
+    public List<Stock> filterListBySize(List<Stock> clothesList, String clothesSize) {
 
         for (int i = 0; i < clothesList.size(); i++) {
 
-            Clothes clothes = clothesList.get(i);
+            Stock clothes = clothesList.get(i);
 
             if (clothes.getClothesSize().equals(clothesSize)){
                 clothesList.remove(clothesList.get(i));

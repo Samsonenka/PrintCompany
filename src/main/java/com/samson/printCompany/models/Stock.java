@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-public class Clothes {
+public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,12 +25,12 @@ public class Clothes {
     @NotNull
     private int clothesQuantity;
 
-    public Clothes() {
+    public Stock() {
     }
 
-    public Clothes(@NotNull String clothesName, @NotNull String clothesBrand,
-                   @NotNull String clothesSize, @NotNull String clothesColor,
-                   @NotNull int clothesQuantity) {
+    public Stock(@NotNull String clothesName, @NotNull String clothesBrand,
+                 @NotNull String clothesSize, @NotNull String clothesColor,
+                 @NotNull int clothesQuantity) {
         this.clothesName = clothesName;
         this.clothesBrand = clothesBrand;
         this.clothesSize = clothesSize;
@@ -83,9 +83,9 @@ public class Clothes {
     }
 
 
-    public Clothes addClothes(List<Clothes> all) {
+    public Stock addClothes(List<Stock> all) {
 
-        for (Clothes value: all){
+        for (Stock value: all){
             if (value.getClothesName().equals(clothesName)){
                 if (value.getClothesBrand().equals(clothesBrand)){
                     if (value.getClothesSize().equals(clothesSize)){
