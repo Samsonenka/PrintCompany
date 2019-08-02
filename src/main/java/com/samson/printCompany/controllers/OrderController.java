@@ -1,5 +1,6 @@
 package com.samson.printCompany.controllers;
 import com.samson.printCompany.models.Orders;
+import com.samson.printCompany.models.Stock;
 import com.samson.printCompany.repos.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,15 +43,19 @@ public class OrderController {
         Orders order = orderRepo.findById(orderID).get();
 
         modelMap.put("order", order);
-        modelMap.put("orderID", order.getOrderID());
 
         return "consumption";
     }
 
     @PostMapping("/saveproduct/{orderID}")
-    public String saveProduct(@PathVariable int orderID, ModelMap modelMap){
+    public String saveProduct(@PathVariable int orderID, Stock clothes, ModelMap modelMap){
 
-        modelMap.put("orderID", orderID);
+        Orders order = orderRepo.findById(orderID).get();
+
+        System.out.println(orderID);
+        System.out.println(clothes.getClothesName());
+
+        modelMap.put("order", order);
 
         return "consumption";
     }

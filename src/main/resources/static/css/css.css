@@ -17,3 +17,11 @@
 .rowDiv:hover {
     opacity: 0.7;
 }
+
+#rock {
+    background: url("/img/add.png") no-repeat;
+    background-size: cover;
+    border: none;
+    width: 35px;
+    height: 35px;
+}

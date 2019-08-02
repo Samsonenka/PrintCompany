@@ -30,29 +30,64 @@
     <h3>Formacja zamówienia</h3>
 </div>
 
-    <div>
-        <form th:action="@{/orders/saveproduct/{id}(id=${orderID})}" method="post">
-            <div class="my-2"><input required  type="text" name="clothesName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>
-            <div class="my-2"><input required type="text" name="clothesBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
-            <select name="clothesSize" class="custom-select my-1" required>
-                <option selected>Wybierz rozmiar</option>
-                <option th:each="size : ${size}"
-                        th:value="${size}"
-                        th:utext="${size}">
-                </option>
-            </select>
-            <div class="my-2"><input required type="text" name="clothesColor" class="form-control" placeholder="Color" aria-describedby="button-addon2"></div>
-            <div class="my-2"><input required type="text" name="clothesQuantity" class="form-control" placeholder="Ilość" aria-describedby="button-addon2"></div>
-            <button  class="btn btn-primary" type="submit">Ok</button>
-        </form>
-    </div>
+<div class="text-center my-3 text-uppercase">
+    <h5 th:text="'№ ' + ${order.orderNumber} + ' / ' + ${order.orderDate}"></h5>
+</div>
 
-<div class="text-center my-3 text-uppercase">
-    <h5 th:text="${order.orderCompanyName}"></h5>
+<div>
+    <table class="table table-sm">
+        <tr>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Marka</th>
+            <th scope="col">Rozmiar</th>
+            <th scope="col">Сolor</th>
+            <th scope="col">Ilość</th>
+        </tr>
+        <tr scope="col" th:each ="clothes : ${clothes}">
+            <td th:utext="${clothes.clothesName}">...</td>
+            <td th:utext="${clothes.clothesBrand}">...</td>
+            <td th:utext="${clothes.clothesSize}">...</td>
+            <td th:utext="${clothes.clothesColor}">...</td>
+            <td th:utext="${clothes.clothesQuantity}">...</td>
+        </tr>
+    </table>
+    <button type="button" id="rock" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+
 </div>
-<div class="text-center my-3 text-uppercase">
-    <h5 th:text="${order.orderCompanyName}"></h5>
+
+
+<!--model addClothes-->
+<!--***************************************************-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dodaj produkt</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/orders/saveproduct/{orderID}(orderID=${order.orderID})}" method="post">
+                    <div class="my-2"><input required  type="text" name="clothesName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>
+                    <div class="my-2"><input required type="text" name="clothesBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
+                    <select name="clothesSize" class="custom-select my-1" required>
+                        <option selected>Wybierz rozmiar</option>
+                        <option th:each="size : ${size}"
+                                th:value="${size}"
+                                th:utext="${size}">
+                        </option>
+                    </select>
+                    <div class="my-2"><input required type="text" name="clothesColor" class="form-control" placeholder="Color" aria-describedby="button-addon2"></div>
+                    <div class="my-2"><input required type="text" name="clothesQuantity" class="form-control" placeholder="Ilość" aria-describedby="button-addon2"></div>
+                    <button  class="btn btn-primary" type="submit">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<!--***************************************************-->
+
 
 </body>
 </html>
