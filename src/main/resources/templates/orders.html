@@ -20,8 +20,7 @@
     </a>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/showAll';return false;">Magazyn</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='/history/showAll';return false;">Historia operacji</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#orderModal" data-whatever="@mdo">Utwórz zamówienie</button>
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
     </div>
 
@@ -40,15 +39,42 @@
                 <h6 class="card-title" th:utext="${orders.orderNumber}"></h6>
             </div>
             <div class="float-right">
-                <h6 class="card-title" th:utext="${orders.orderDate}"></h6>
-            </div>
-            <div class="float-right">
-                <a th:href="@{'/orders/addproduct/' + ${orders.orderID}}"><img th:src="@{'/img/add.png'}" width="35" height="35" alt="" class="rowDiv"></a>
-                <img th:src="@{'/img/info.png'}" width="35" height="35" alt="" class="rowDiv">
-                <img th:src="@{'/img/delete.png'}" width="35" height="35" alt="" class="rowDiv">
+                <div class="float-right">
+                    <h6 class="card-title" th:utext="${orders.orderDate}"></h6>
+                </div>
+                <!--<div>-->
+                    <!--<a th:href="@{'/orders/addproduct/' + ${orders.orderID}}"><img th:src="@{'/img/add.png'}" width="35" height="35" alt="" class="rowDiv"></a>-->
+                    <!--<img th:src="@{'/img/info.png'}" width="35" height="35" alt="" class="rowDiv">-->
+                    <!--<img th:src="@{'/img/delete.png'}" width="35" height="35" alt="" class="rowDiv">-->
+                <!--</div>-->
             </div>
         </div>
     </div>
+
+    <!--model addOrder-->
+    <!--***************************************************-->
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Filtruj według rozmiaru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/orders/add}" method="post">
+                        <div class="my-2"><input required  type="text" name="orderNameFirm" class="form-control" placeholder="Nazwa firmy" aria-describedby="button-addon2"/></div>
+                        <div class="my-2"><input required type="text" name="orderAddress" class="form-control" placeholder="Adres firmy" aria-describedby="button-addon2"></div>
+                        <div class="my-2"><textarea type="text" name="orderComments" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Uwagi" aria-describedby="button-addon2"></textarea></div>
+                        <button  class="btn btn-primary" type="submit">Ok</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--***************************************************-->
+
 
 </div>
 

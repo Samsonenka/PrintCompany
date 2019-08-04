@@ -5,7 +5,7 @@ import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Stock;
 import com.samson.printCompany.models.enums.Size;
 import com.samson.printCompany.models.enums.Status;
-import com.samson.printCompany.repos.ClothesRepo;
+import com.samson.printCompany.repos.StockRepo;
 import com.samson.printCompany.repos.HistoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import java.util.*;
 public class StockController {
 
     @Autowired
-    private ClothesRepo clothesRepo;
+    private StockRepo clothesRepo;
     @Autowired
     private HistoryRepo historyRepo;
 
@@ -32,7 +32,7 @@ public class StockController {
         modelMap.put("clothes", clothesRepo.findAll());
         modelMap.put("size", Size.values());
 
-        return "clothes";
+        return "stock";
     }
 
     @PostMapping("/add")
@@ -58,7 +58,7 @@ public class StockController {
         modelMap.put("clothes", clothesList);
         modelMap.put("size", Size.values());
 
-        return "clothes";
+        return "stock";
     }
 
 

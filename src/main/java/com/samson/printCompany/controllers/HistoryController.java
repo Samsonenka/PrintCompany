@@ -2,7 +2,6 @@ package com.samson.printCompany.controllers;
 
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.History;
-import com.samson.printCompany.repos.ClothesRepo;
 import com.samson.printCompany.repos.HistoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

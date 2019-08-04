@@ -34,14 +34,13 @@ public class ClothesOrder {
 
     public ClothesOrder(@NotNull String clothesOrderName, @NotNull String clothesOrderBrand,
                         @NotNull String clothesOrderSize, @NotNull String clothesOrderColor,
-                        @NotNull int clothesOrderQuantity, @NotNull double clothesOrderPrice,
-                        @NotNull int orderID) {
+                        @NotNull int clothesOrderQuantity, @NotNull int orderID) {
         this.clothesOrderName = clothesOrderName;
         this.clothesOrderBrand = clothesOrderBrand;
         this.clothesOrderSize = clothesOrderSize;
         this.clothesOrderColor = clothesOrderColor;
         this.clothesOrderQuantity = clothesOrderQuantity;
-        this.clothesOrderPrice = clothesOrderPrice;
+        this.clothesOrderPrice = 0;
         this.orderID = orderID;
     }
 
