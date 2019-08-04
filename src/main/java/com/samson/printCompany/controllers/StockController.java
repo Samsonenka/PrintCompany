@@ -1,11 +1,12 @@
 package com.samson.printCompany.controllers;
 
 import com.samson.printCompany.logics.FilterList;
-import com.samson.printCompany.models.Arrival;
+import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Stock;
 import com.samson.printCompany.models.enums.Size;
-import com.samson.printCompany.repos.ArrivalRepo;
+import com.samson.printCompany.models.enums.Status;
 import com.samson.printCompany.repos.ClothesRepo;
+import com.samson.printCompany.repos.HistoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +24,7 @@ public class StockController {
     @Autowired
     private ClothesRepo clothesRepo;
     @Autowired
-    private ArrivalRepo arrivalRepo;
+    private HistoryRepo historyRepo;
 
     @GetMapping("/showAll")
     public String showClothes(ModelMap modelMap){
@@ -38,9 +39,9 @@ public class StockController {
     public String addClothes(Stock clothes, ModelMap modelMap){
 
         Stock newClothes = clothes.addClothes(clothesRepo.findAll());
-        Arrival arrival = new Arrival(clothes);
+        History history = new History(clothes, Status.arrival.toString());
 
-        arrivalRepo.save(arrival);
+        historyRepo.save(history);
         clothesRepo.save(newClothes);
 
         modelMap.put("clothes", clothesRepo.findAll());

@@ -1,9 +1,9 @@
 package com.samson.printCompany.controllers;
 
 import com.samson.printCompany.logics.FilterList;
-import com.samson.printCompany.models.Arrival;
-import com.samson.printCompany.repos.ArrivalRepo;
+import com.samson.printCompany.models.History;
 import com.samson.printCompany.repos.ClothesRepo;
+import com.samson.printCompany.repos.HistoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,15 +21,12 @@ import java.util.List;
 public class HistoryController {
 
     @Autowired
-    ArrivalRepo arrivalRepo;
-
-    @Autowired
-    ClothesRepo clothesRepo;
+    private HistoryRepo historyRepo;
 
     @GetMapping("/showAll")
     public String showHistory(ModelMap modelMap){
 
-        List<Arrival> arrivalList = arrivalRepo.findAll();
+        List<History> arrivalList = historyRepo.findAll();
         Collections.reverse(arrivalList);
 
         modelMap.put("history", arrivalList);
@@ -42,7 +38,7 @@ public class HistoryController {
     public String filterHistory(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, ModelMap modelMap){
 
         FilterList filterList = new FilterList();
-        List<Arrival> arrivalList = filterList.filterListByDate(arrivalRepo.findAll(), date);
+        List<History> arrivalList = filterList.filterListByDate(historyRepo.findAll(), date);
 
         modelMap.put("history", arrivalList);
 

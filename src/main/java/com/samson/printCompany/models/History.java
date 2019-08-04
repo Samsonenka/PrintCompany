@@ -1,7 +1,5 @@
 package com.samson.printCompany.models;
 
-import com.samson.printCompany.models.enums.Status;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class Arrival {
+public class History{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,10 +28,10 @@ public class Arrival {
     private LocalDate arrivalDate;
     private String arrivalStatus;
 
-    public Arrival() {
+    public History() {
     }
 
-    public Arrival(Stock clothes) {
+    public History(Stock clothes, String status) {
 
         this.companyName = clothes.getClothesBrand();
         this.clothesName = clothes.getClothesName();
@@ -41,7 +39,7 @@ public class Arrival {
         this.clothesQuantity = clothes.getClothesQuantity();
         this.clothesColor = clothes.getClothesColor();
         this.arrivalDate = LocalDate.now();
-        arrivalStatus = Status.arrival.toString();
+        arrivalStatus = status;
     }
 
     public String getArrivalStatus() {

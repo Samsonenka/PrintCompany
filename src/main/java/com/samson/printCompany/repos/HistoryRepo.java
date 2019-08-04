@@ -1,9 +1,9 @@
 package com.samson.printCompany.repos;
 
-import com.samson.printCompany.models.Consumption;
+import com.samson.printCompany.models.History;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConsumptionRepo extends JpaRepository<Consumption, Integer> {
+public interface HistoryRepo extends JpaRepository<History, Integer> {
 }

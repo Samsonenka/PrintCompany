@@ -1,6 +1,6 @@
 package com.samson.printCompany.logics;
 
-import com.samson.printCompany.models.Arrival;
+import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Stock;
 
 import java.time.LocalDate;
@@ -23,11 +23,11 @@ public class FilterList {
         return clothesList;
     }
 
-    public List<Arrival> filterListByDate(List<Arrival> arrivalList, LocalDate date) {
+    public List<History> filterListByDate(List<History> arrivalList, LocalDate date) {
 
         for (int i = 0; i < arrivalList.size(); i++){
 
-            Arrival arrival = arrivalList.get(i);
+            History arrival = arrivalList.get(i);
 
             if (!arrival.getArrivalDate().isBefore(date) && !arrival.getArrivalDate().isAfter(date)){
                 arrivalList.remove(arrivalList.get(i));
