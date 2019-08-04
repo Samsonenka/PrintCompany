@@ -1,4 +1,5 @@
 package com.samson.printCompany.controllers;
+import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.ClothesOrder;
 import com.samson.printCompany.models.Orders;
 import com.samson.printCompany.repos.ClothesOrderRepo;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/orders/")
@@ -41,18 +44,21 @@ public class OrderController {
         return "orders";
     }
 
-    @GetMapping("/addproduct/{orderID}")
+    @GetMapping("/showClothesOrder/{orderID}")
     public String addProduct(@PathVariable int orderID, ModelMap modelMap){
 
         Orders order = orderRepo.findById(orderID).get();
 
-        modelMap.put("clothesOrder", clothesOrderRepo.findAll());
+        FilterList filterList = new FilterList();
+        List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
+
+        modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("order", order);
 
-        return "saveclothesorder";
+        return "showClothesOrder";
     }
 
-    @PostMapping("/saveproduct/{orderID}")
+    @PostMapping("/saveClothesOrder/{orderID}")
     public String saveProduct(@PathVariable int orderID, @RequestParam String clothesOrderName,
                               @RequestParam String clothesOrderBrand, @RequestParam String clothesOrderSize,
                               @RequestParam String clothesOrderColor, @RequestParam int clothesOrderQuantity,
@@ -68,6 +74,6 @@ public class OrderController {
         modelMap.put("clothesOrder", clothesOrderRepo.findAll());
         modelMap.put("order", order);
 
-        return "saveclothesorder";
+        return "showClothesOrder";
     }
 }

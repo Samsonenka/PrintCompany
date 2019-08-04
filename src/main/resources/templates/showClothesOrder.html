@@ -68,7 +68,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/orders/saveproduct/{orderID}(orderID=${order.orderID})}" method="post">
+                <form th:action="@{/orders/saveClothesOrder/{orderID}(orderID=${order.orderID})}" method="post">
                     <div class="my-2"><input required  type="text" name="clothesOrderName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>
                     <div class="my-2"><input required type="text" name="clothesOrderBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
                     <select name="clothesOrderSize" class="custom-select my-1" required>

@@ -1,9 +1,12 @@
 package com.samson.printCompany.logics;
 
+import com.samson.printCompany.models.ClothesOrder;
 import com.samson.printCompany.models.History;
+import com.samson.printCompany.models.Orders;
 import com.samson.printCompany.models.Stock;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterList {
@@ -37,4 +40,15 @@ public class FilterList {
         return arrivalList;
     }
 
+    public List<ClothesOrder> findClothesByOrderID(Orders order, List<ClothesOrder> all) {
+
+        List<ClothesOrder> clothesOrderList = new ArrayList<>();
+
+        for (ClothesOrder clothesOrder: all){
+            if (clothesOrder.getOrderID() == order.getOrderID()){
+                clothesOrderList.add(clothesOrder);
+            }
+        }
+        return clothesOrderList;
+    }
 }
