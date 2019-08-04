@@ -32,7 +32,6 @@
 
 <div class="row align-items-center justify-content-center">
 
-
         <div class="card mb-2 zoom" style="width: 40rem;" th:each ="orders : ${orders}">
             <a th:href="@{'/orders/showClothesOrder/' + ${orders.orderID}}">
                 <div class="card-body">
@@ -44,11 +43,6 @@
                         <div class="float-right">
                             <h6 class="card-title" th:utext="${orders.orderDate}"></h6>
                         </div>
-                        <!--<div>-->
-                        <!--<a th:href="@{'/orders/addproduct/' + ${orders.orderID}}"><img th:src="@{'/img/add.png'}" width="35" height="35" alt="" class="rowDiv"></a>-->
-                        <!--<img th:src="@{'/img/info.png'}" width="35" height="35" alt="" class="rowDiv">-->
-                        <!--<img th:src="@{'/img/delete.png'}" width="35" height="35" alt="" class="rowDiv">-->
-                        <!--</div>-->
                     </div>
                 </div>
             </a>

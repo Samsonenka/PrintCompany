@@ -18,12 +18,20 @@
     opacity: 0.7;
 }
 
-#rock {
-    background: url("/img/add.png") no-repeat;
-    background-size: cover;
+.rock {
     border: none;
     width: 35px;
     height: 35px;
+}
+
+#buttonAdd{
+    background: url("/img/add.png") no-repeat;
+    background-size: cover;
+}
+
+#buttonDelete{
+    background: url("/img/delete.png") no-repeat;
+    background-size: cover;
 }
 
 .zoom {

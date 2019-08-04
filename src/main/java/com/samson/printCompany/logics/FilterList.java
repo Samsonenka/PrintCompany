@@ -7,7 +7,9 @@ import com.samson.printCompany.models.Stock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FilterList {
 
@@ -50,5 +52,16 @@ public class FilterList {
             }
         }
         return clothesOrderList;
+    }
+
+    public Set<String> removeReplays(List<Stock> all) {
+
+        List<String> stringList = new ArrayList<>();
+
+        for (Stock stock: all){
+            stringList.add(stock.getClothesColor());
+        }
+
+        return new HashSet<>(stringList);
     }
 }

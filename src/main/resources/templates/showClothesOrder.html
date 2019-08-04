@@ -20,8 +20,7 @@
     </a>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" onclick="location.href='/clothes/showAll';return false;">Magazyn</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='/history/showAll';return false;">Historia operacji</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/orders/showAll';return false;">Lista zamówień</button>
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
     </div>
 </nav>
@@ -51,18 +50,19 @@
             <td th:utext="${clothesOrder.clothesOrderQuantity}">...</td>
         </tr>
     </table>
-    <button type="button" id="rock" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+    <button type="button" id="buttonAdd" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#addOrderModal" data-whatever="@mdo"></button>
+    <button type="button" id="buttonDelete" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#deleteOrderModal"></button>
 
 </div>
 
 
 <!--model addClothes-->
 <!--***************************************************-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dodaj produkt</h5>
+                <h5 class="modal-title" id="addOrderModalLabel">Dodaj produkt</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,9 +78,40 @@
                                 th:utext="${size}">
                         </option>
                     </select>
-                    <div class="my-2"><input required type="text" name="clothesOrderColor" class="form-control" placeholder="Color" aria-describedby="button-addon2"></div>
+                    <select name="clothesOrderColor" class="custom-select my-1" required>
+                        <option selected>Wybierz color</option>
+                        <option th:each="color : ${color}"
+                                th:value="${color}"
+                                th:utext="${color}">
+                        </option>
+                    </select>
+                    <!--<div class="my-2"><input required type="text" name="clothesOrderColor" class="form-control" placeholder="Color" aria-describedby="button-addon2"></div>-->
                     <div class="my-2"><input required type="text" name="clothesOrderQuantity" class="form-control" placeholder="Ilość" aria-describedby="button-addon2"></div>
                     <button  class="btn btn-primary" type="submit">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--***************************************************-->
+
+<!--model deleteOrder-->
+<!--***************************************************-->
+
+<div class="modal fade" id="deleteOrderModal" tabindex="-1" role="dialog" aria-labelledby="deleteOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img th:src="@{'/img/alert.png'}" width="50" height="50" alt="">
+                <h5 class="mx-2 my-2 float-right">Usunąć zamówienie?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Nie</button>
+                <form th:action="@{/orders/deleteClothesOrder/{orderID}(orderID=${order.orderID})}" method="post">
+                    <button type="submit" class="btn btn-light">Tak</button>
                 </form>
             </div>
         </div>
