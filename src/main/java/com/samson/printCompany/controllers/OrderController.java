@@ -2,8 +2,6 @@ package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.ClothesOrder;
 import com.samson.printCompany.models.Orders;
-import com.samson.printCompany.models.Stock;
-import com.samson.printCompany.models.enums.Size;
 import com.samson.printCompany.repos.ClothesOrderRepo;
 import com.samson.printCompany.repos.OrderRepo;
 import com.samson.printCompany.repos.StockRepo;
@@ -58,12 +56,13 @@ public class OrderController {
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
 
-        Set<String> set = filterList.removeReplays(stockRepo.findAll());
+        Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
+        Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
 
         modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("order", order);
-        modelMap.put("size", Size.values());
-        modelMap.put("color", set);
+        modelMap.put("size", setSize);
+        modelMap.put("color", setColor);
 
         return "showClothesOrder";
     }

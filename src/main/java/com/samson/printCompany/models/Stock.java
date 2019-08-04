@@ -28,14 +28,23 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(@NotNull String clothesName, @NotNull String clothesBrand,
-                 @NotNull String clothesSize, @NotNull String clothesColor,
-                 @NotNull int clothesQuantity) {
-        this.clothesName = clothesName;
-        this.clothesBrand = clothesBrand;
-        this.clothesSize = clothesSize;
-        this.clothesColor = clothesColor;
-        this.clothesQuantity = clothesQuantity;
+//    public Stock(@NotNull String clothesName, @NotNull String clothesBrand,
+//                 @NotNull String clothesSize, @NotNull String clothesColor,
+//                 @NotNull int clothesQuantity) {
+//        this.clothesName = clothesName.toUpperCase();
+//        this.clothesBrand = clothesBrand.toUpperCase();
+//        this.clothesSize = clothesSize.toUpperCase();
+//        this.clothesColor = clothesColor.toUpperCase();
+//        this.clothesQuantity = clothesQuantity;
+//    }
+
+    public Stock(Stock clothes) {
+
+        this.clothesName = clothes.getClothesName().toUpperCase();
+        this.clothesBrand = clothes.clothesBrand.toUpperCase();
+        this.clothesSize = clothes.getClothesSize().toUpperCase();
+        this.clothesColor = clothes.getClothesColor().toUpperCase();
+        this.clothesQuantity = clothes.getClothesQuantity();
     }
 
     public String getClothesColor() {

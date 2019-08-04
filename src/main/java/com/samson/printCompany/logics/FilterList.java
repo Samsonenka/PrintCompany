@@ -54,12 +54,23 @@ public class FilterList {
         return clothesOrderList;
     }
 
-    public Set<String> removeReplays(List<Stock> all) {
+    public Set<String> removeReplaysColors(List<Stock> all) {
 
         List<String> stringList = new ArrayList<>();
 
         for (Stock stock: all){
             stringList.add(stock.getClothesColor());
+        }
+
+        return new HashSet<>(stringList);
+    }
+
+    public Set<String> removeReplaysSize(List<Stock> all) {
+
+        List<String> stringList = new ArrayList<>();
+
+        for (Stock stock: all){
+            stringList.add(stock.getClothesSize());
         }
 
         return new HashSet<>(stringList);

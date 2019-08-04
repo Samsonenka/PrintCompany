@@ -3,7 +3,6 @@ package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Stock;
-import com.samson.printCompany.models.enums.Size;
 import com.samson.printCompany.models.enums.Status;
 import com.samson.printCompany.repos.StockRepo;
 import com.samson.printCompany.repos.HistoryRepo;
@@ -30,7 +29,6 @@ public class StockController {
     public String showClothes(ModelMap modelMap){
 
         modelMap.put("clothes", clothesRepo.findAll());
-        modelMap.put("size", Size.values());
 
         return "stock";
     }
@@ -38,7 +36,9 @@ public class StockController {
     @PostMapping("/add")
     public String addClothes(Stock clothes, ModelMap modelMap){
 
-        Stock newClothes = clothes.addClothes(clothesRepo.findAll());
+        Stock stock = new Stock(clothes);
+
+        Stock newClothes = stock.addClothes(clothesRepo.findAll());
         History history = new History(clothes, Status.arrival.toString());
 
         historyRepo.save(history);
@@ -56,7 +56,6 @@ public class StockController {
         List<Stock> clothesList = filterList.filterListBySize(clothesRepo.findAll(), clothesSize);
 
         modelMap.put("clothes", clothesList);
-        modelMap.put("size", Size.values());
 
         return "stock";
     }

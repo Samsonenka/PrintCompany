@@ -35,10 +35,10 @@ public class ClothesOrder {
     public ClothesOrder(@NotNull String clothesOrderName, @NotNull String clothesOrderBrand,
                         @NotNull String clothesOrderSize, @NotNull String clothesOrderColor,
                         @NotNull int clothesOrderQuantity, @NotNull int orderID) {
-        this.clothesOrderName = clothesOrderName;
-        this.clothesOrderBrand = clothesOrderBrand;
-        this.clothesOrderSize = clothesOrderSize;
-        this.clothesOrderColor = clothesOrderColor;
+        this.clothesOrderName = clothesOrderName.toUpperCase();
+        this.clothesOrderBrand = clothesOrderBrand.toUpperCase();
+        this.clothesOrderSize = clothesOrderSize.toUpperCase();
+        this.clothesOrderColor = clothesOrderColor.toUpperCase();
         this.clothesOrderQuantity = clothesOrderQuantity;
         this.clothesOrderPrice = 0;
         this.orderID = orderID;
