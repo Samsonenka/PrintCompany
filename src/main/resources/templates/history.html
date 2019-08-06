@@ -44,7 +44,7 @@
             <td th:utext="${arrival.clothesQuantity}">...</td>
             <td th:utext="${arrival.arrivalDate}">...</td>
             <td>
-                <img th:src="@{'/img/' + ${arrival.arrivalStatus} + '.png'}">
+                <img th:src="@{'/img/' + ${arrival.arrivalStatus} + '.png'}" width="30" height="30">
             </td>
             </tr>
     </table>

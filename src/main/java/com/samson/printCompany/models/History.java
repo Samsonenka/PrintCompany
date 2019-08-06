@@ -42,6 +42,18 @@ public class History{
         arrivalStatus = status;
     }
 
+    public History(@NotNull String companyName, @NotNull String clothesName,
+                   @NotNull String clothesSize, @NotNull String clothesColor,
+                   @NotNull int clothesQuantity, String status) {
+        this.companyName = companyName;
+        this.clothesName = clothesName;
+        this.clothesSize = clothesSize;
+        this.clothesColor = clothesColor;
+        this.clothesQuantity = clothesQuantity;
+        this.arrivalDate = LocalDate.now();
+        this.arrivalStatus = status;
+    }
+
     public String getArrivalStatus() {
         return arrivalStatus;
     }

@@ -1,8 +1,11 @@
 package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.ClothesOrder;
+import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Orders;
+import com.samson.printCompany.models.enums.Status;
 import com.samson.printCompany.repos.ClothesOrderRepo;
+import com.samson.printCompany.repos.HistoryRepo;
 import com.samson.printCompany.repos.OrderRepo;
 import com.samson.printCompany.repos.StockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class OrderController {
 
     @Autowired
     private StockRepo stockRepo;
+
+    @Autowired
+    private HistoryRepo historyRepo;
 
     @GetMapping("/showAll")
     public String showOrders(ModelMap modelMap){
@@ -78,7 +84,13 @@ public class OrderController {
         ClothesOrder clothesOrder = new ClothesOrder(clothesOrderName, clothesOrderBrand,
                                                         clothesOrderSize, clothesOrderColor,
                                                             clothesOrderQuantity, orderID);
+
+        History history = new History(clothesOrderName, clothesOrderBrand,
+                                                        clothesOrderSize, clothesOrderColor,
+                                                        clothesOrderQuantity, Status.consumption.toString());
+
         clothesOrderRepo.save(clothesOrder);
+        historyRepo.save(history);
 
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
