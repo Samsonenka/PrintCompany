@@ -86,13 +86,7 @@ public class OrderController {
                                                         clothesOrderSize, clothesOrderColor,
                                                             clothesOrderQuantity, orderID);
 
-        History history = new History(clothesOrderName, clothesOrderBrand,
-                                                        clothesOrderSize, clothesOrderColor,
-                                                        clothesOrderQuantity, Status.consumption.toString());
-        clothesOrderRepo.save(clothesOrder);
-        historyRepo.save(history);
-
-        boolean isChange = clothesOrder.stockChange(stockRepo.findAll(), stockRepo);
+        boolean isChange = clothesOrder.stockChange(stockRepo.findAll(), stockRepo, clothesOrderRepo, historyRepo);
 
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());

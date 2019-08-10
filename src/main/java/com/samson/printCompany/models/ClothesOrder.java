@@ -1,5 +1,8 @@
 package com.samson.printCompany.models;
 
+import com.samson.printCompany.models.enums.Status;
+import com.samson.printCompany.repos.ClothesOrderRepo;
+import com.samson.printCompany.repos.HistoryRepo;
 import com.samson.printCompany.repos.StockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -81,7 +84,7 @@ public class ClothesOrder {
     }
 
 
-    public boolean stockChange(List<Stock> all, StockRepo stockRepo) {
+    public boolean stockChange(List<Stock> all, StockRepo stockRepo, ClothesOrderRepo clothesOrderRepo, HistoryRepo historyRepo) {
 
         Stock stock = null;
 
@@ -96,6 +99,13 @@ public class ClothesOrder {
 
                 stock.setClothesQuantity(stock.getClothesQuantity() - clothesOrderQuantity);
                 stockRepo.save(stock);
+                clothesOrderRepo.save(this);
+
+                History history = new History(clothesOrderName, clothesOrderBrand,
+                        clothesOrderSize, clothesOrderColor,
+                        clothesOrderQuantity, Status.consumption.toString());
+
+                historyRepo.save(history);
 
                 return true;
             }
