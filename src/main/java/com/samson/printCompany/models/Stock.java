@@ -28,25 +28,18 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(Stock clothes) {
-
-        this.clothesName = clothes.getClothesName().toUpperCase();
-        this.clothesBrand = clothes.clothesBrand.toUpperCase();
-        this.clothesSize = clothes.getClothesSize().toUpperCase();
-        this.clothesColor = clothes.getClothesColor().toUpperCase();
-        this.clothesQuantity = clothes.getClothesQuantity();
+    public Stock(@NotNull String clothesName, @NotNull String clothesBrand,
+                 @NotNull String clothesSize, @NotNull String clothesColor,
+                 @NotNull int clothesQuantity) {
+        this.clothesName = clothesName.toUpperCase();
+        this.clothesBrand = clothesBrand.toUpperCase();
+        this.clothesSize = clothesSize.toUpperCase();
+        this.clothesColor = clothesColor.toUpperCase();
+        this.clothesQuantity = clothesQuantity;
     }
 
     public String getClothesColor() {
         return clothesColor;
-    }
-
-    public void setClothesColor(String clothesColor) {
-        this.clothesColor = clothesColor;
-    }
-
-    public int getClothesID() {
-        return clothesID;
     }
 
     public String getClothesName() {
@@ -63,18 +56,6 @@ public class Stock {
 
     public int getClothesQuantity() {
         return clothesQuantity;
-    }
-
-    public void setClothesName(String clothesName) {
-        this.clothesName = clothesName;
-    }
-
-    public void setClothesBrand(String clothesBrand) {
-        this.clothesBrand = clothesBrand;
-    }
-
-    public void setClothesSize(String clothesSize) {
-        this.clothesSize = clothesSize;
     }
 
     public void setClothesQuantity(int clothesQuantity) {
@@ -98,4 +79,5 @@ public class Stock {
         }
         return this;
     }
+
 }

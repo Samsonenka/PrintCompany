@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class ClothesOrder {
@@ -74,5 +75,26 @@ public class ClothesOrder {
 
     public int getOrderID() {
         return orderID;
+    }
+
+
+    public Stock stockChange(List<Stock> all) {
+        
+        Stock stock = null;
+        
+        for (Stock value: all){
+            stock = value;
+            
+            if (stock.getClothesName().equals(clothesOrderName) &
+                  stock.getClothesBrand().equals(clothesOrderBrand) &
+                     stock.getClothesColor().equals(clothesOrderColor) &
+                        stock.getClothesSize().equals(clothesOrderSize)){
+
+                stock.setClothesQuantity(stock.getClothesQuantity() - clothesOrderQuantity);
+
+                return stock;
+            }
+        }
+    return stock;
     }
 }

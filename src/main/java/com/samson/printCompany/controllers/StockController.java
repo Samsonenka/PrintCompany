@@ -34,12 +34,14 @@ public class StockController {
     }
 
     @PostMapping("/add")
-    public String addClothes(Stock clothes, ModelMap modelMap){
+    public String addClothes(@RequestParam String clothesName, @RequestParam String clothesBrand,
+                             @RequestParam String clothesSize, @RequestParam String clothesColor,
+                             @RequestParam int clothesQuantity, ModelMap modelMap){
 
-        Stock stock = new Stock(clothes);
+        Stock stock = new Stock(clothesName, clothesBrand, clothesSize, clothesColor, clothesQuantity);
 
         Stock newClothes = stock.addClothes(clothesRepo.findAll());
-        History history = new History(clothes, Status.arrival.toString());
+        History history = new History(stock, Status.arrival.toString());
 
         historyRepo.save(history);
         clothesRepo.save(newClothes);

@@ -1,6 +1,5 @@
 package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
-import com.samson.printCompany.logics.StockChanges;
 import com.samson.printCompany.models.ClothesOrder;
 import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Orders;
@@ -93,17 +92,9 @@ public class OrderController {
         clothesOrderRepo.save(clothesOrder);
         historyRepo.save(history);
 
-        List<Stock> stockList = stockRepo.findAll();
-
-        for (Stock stock: stockList){
-            if (stock.getClothesName().equals(clothesOrder.getClothesOrderName())){
-                if (stock.getClothesBrand().equals(clothesOrder.getClothesOrderBrand())){
-                    stock.setClothesQuantity(stock.getClothesQuantity() - clothesOrder.getClothesOrderQuantity());
-                    stockRepo.save(stock);
-                }
-            }
-        }
-
+        Stock stock = clothesOrder.stockChange(stockRepo.findAll());
+        System.out.println(stock.getClothesQuantity());
+        stockRepo.save(stock);
 
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
