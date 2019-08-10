@@ -54,6 +54,10 @@
     <button type="button" id="buttonDelete" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#deleteOrderModal"></button>
     <button type="button" id="buttonInfo" class="btn btn-secondary rock rowDiv" onclick="location.href='/orders/details';return false;"></button>
 
+    <div th:if="${isChange == false}" class="alert alert-danger" role="alert">
+        Brak towarów o takiej ilości
+    </div>
+
 </div>
 
 

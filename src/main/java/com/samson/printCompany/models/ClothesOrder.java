@@ -1,5 +1,8 @@
 package com.samson.printCompany.models;
 
+import com.samson.printCompany.repos.StockRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -78,23 +81,26 @@ public class ClothesOrder {
     }
 
 
-    public Stock stockChange(List<Stock> all) {
-        
+    public boolean stockChange(List<Stock> all, StockRepo stockRepo) {
+
         Stock stock = null;
-        
+
         for (Stock value: all){
             stock = value;
-            
+
             if (stock.getClothesName().equals(clothesOrderName) &
                   stock.getClothesBrand().equals(clothesOrderBrand) &
                      stock.getClothesColor().equals(clothesOrderColor) &
-                        stock.getClothesSize().equals(clothesOrderSize)){
+                        stock.getClothesSize().equals(clothesOrderSize) &
+                          stock.getClothesQuantity() >= clothesOrderQuantity){
 
                 stock.setClothesQuantity(stock.getClothesQuantity() - clothesOrderQuantity);
+                stockRepo.save(stock);
 
-                return stock;
+                return true;
             }
         }
-    return stock;
+        stockRepo.save(stock);
+        return false;
     }
 }

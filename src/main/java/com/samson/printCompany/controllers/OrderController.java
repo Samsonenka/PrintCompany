@@ -92,15 +92,14 @@ public class OrderController {
         clothesOrderRepo.save(clothesOrder);
         historyRepo.save(history);
 
-        Stock stock = clothesOrder.stockChange(stockRepo.findAll());
-        System.out.println(stock.getClothesQuantity());
-        stockRepo.save(stock);
+        boolean isChange = clothesOrder.stockChange(stockRepo.findAll(), stockRepo);
 
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
 
         modelMap.put("order", order);
         modelMap.put("clothesOrder", clothesOrderList);
+        modelMap.put("isChange", isChange);
 
         return "showClothesOrder";
     }
