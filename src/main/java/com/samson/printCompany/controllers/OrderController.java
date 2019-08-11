@@ -1,10 +1,7 @@
 package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.ClothesOrder;
-import com.samson.printCompany.models.History;
 import com.samson.printCompany.models.Orders;
-import com.samson.printCompany.models.Stock;
-import com.samson.printCompany.models.enums.Status;
 import com.samson.printCompany.repos.ClothesOrderRepo;
 import com.samson.printCompany.repos.HistoryRepo;
 import com.samson.printCompany.repos.OrderRepo;
@@ -63,11 +60,15 @@ public class OrderController {
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
 
+        Set<String> setName = filterList.removeReplaysName(stockRepo.findAll());
+        Set<String> setBrand = filterList.removeReplaysBrand(stockRepo.findAll());
         Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
         Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
 
         modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("order", order);
+        modelMap.put("name", setName);
+        modelMap.put("brand", setBrand);
         modelMap.put("size", setSize);
         modelMap.put("color", setColor);
 
@@ -91,9 +92,18 @@ public class OrderController {
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
 
+        Set<String> setName = filterList.removeReplaysName(stockRepo.findAll());
+        Set<String> setBrand = filterList.removeReplaysBrand(stockRepo.findAll());
+        Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
+        Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
+
         modelMap.put("order", order);
         modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("isChange", isChange);
+        modelMap.put("name", setName);
+        modelMap.put("brand", setBrand);
+        modelMap.put("size", setSize);
+        modelMap.put("color", setColor);
 
         return "showClothesOrder";
     }

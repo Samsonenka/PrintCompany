@@ -55,7 +55,7 @@
     <button type="button" id="buttonDelete" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#deleteOrderModal"></button>
     <button type="button" id="buttonInfo" class="btn btn-secondary rock rowDiv" onclick="location.href='/orders/details';return false;"></button>
 
-    <div th:if="${isChange == false}" class="alert alert-danger" role="alert">
+    <div th:if="${isChange == false}" class="alert alert-danger my-3" role="alert">
         Brak towarów o takiej ilości
     </div>
 
@@ -75,8 +75,22 @@
             </div>
             <div class="modal-body">
                 <form th:action="@{/orders/saveClothesOrder/{orderID}(orderID=${order.orderID})}" method="post">
-                    <div class="my-2"><input required  type="text" name="clothesOrderName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>
-                    <div class="my-2"><input required type="text" name="clothesOrderBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
+                    <!--<div class="my-2"><input required  type="text" name="clothesOrderName" class="form-control" placeholder="Typ" aria-describedby="button-addon2"/></div>-->
+                    <!--<div class="my-2"><input required type="text" name="clothesOrderBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>-->
+                    <select name="clothesOrderName" class="custom-select my-1" required>
+                        <option selected>Wybierz kategorie</option>
+                        <option th:each="name : ${name}"
+                                th:value="${name}"
+                                th:utext="${name}">
+                        </option>
+                    </select>
+                    <select name="clothesOrderBrand" class="custom-select my-1" required>
+                        <option selected>Wybierz marke</option>
+                        <option th:each="brand : ${brand}"
+                                th:value="${brand}"
+                                th:utext="${brand}">
+                        </option>
+                    </select>
                     <select name="clothesOrderSize" class="custom-select my-1" required>
                         <option selected>Wybierz rozmiar</option>
                         <option th:each="size : ${size}"
