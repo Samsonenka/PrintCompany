@@ -113,4 +113,14 @@ public class OrderController {
 
         return "orders";
     }
+
+    @GetMapping("/filter")
+    public String filterOrder(@RequestParam String filter, ModelMap modelMap){
+
+        Orders orders = new FilterList().filterByNumberOrder(orderRepo.findAll(), filter);
+
+        modelMap.put("orders", orders);
+
+        return "orders";
+    }
 }

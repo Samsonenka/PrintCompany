@@ -82,4 +82,16 @@ public class FilterList {
         }
         return newList;
     }
+
+    public Orders filterByNumberOrder(List<Orders> ordersList, String filter){
+
+        List<Orders> newList = new ArrayList<>();
+
+        for (Orders value: ordersList){
+            if (value.getOrderNumber().equals(filter)){
+                return value;
+            }
+        }
+        return null;
+    }
 }

@@ -20,8 +20,11 @@
     </a>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#orderModal" data-whatever="@mdo">Utwórz zamówienie</button>
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
+        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#orderModal" data-whatever="@mdo">Utwórz zamówienie</button>
+        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/history/showAll';return false;">Historia operacji</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/orders/showAll';return false;">Lista zamówień</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/clothes/showAll';return false;">Magazyn</button>
     </div>
 
 </nav>
@@ -66,6 +69,28 @@
                         <div class="my-2"><input required type="text" name="orderAddress" class="form-control" placeholder="Adres firmy" aria-describedby="button-addon2"></div>
                         <div class="my-2"><textarea type="text" name="orderComments" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Uwagi" aria-describedby="button-addon2"></textarea></div>
                         <button  class="btn btn-primary" type="submit">Ok</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--***************************************************-->
+
+    <!--model filter-->
+    <!--***************************************************-->
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterModalLabel">Filtruj według rozmiaru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/orders/filter}" method="get">
+                        <div class="my-2"><input required  type="text" name="filter" class="form-control" placeholder="Numer zamówienia" aria-describedby="button-addon2"/></div>
+                        <button  class="btn btn-primary my-2" type="submit">Ok</button>
                     </form>
                 </div>
             </div>
