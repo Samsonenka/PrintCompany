@@ -6,27 +6,9 @@ import com.samson.printCompany.models.Orders;
 import com.samson.printCompany.models.Stock;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FilterList {
-
-
-    public List<Stock> filterListBySize(List<Stock> clothesList, String clothesSize) {
-
-        for (int i = 0; i < clothesList.size(); i++) {
-
-            Stock clothes = clothesList.get(i);
-
-            if (clothes.getClothesSize().equals(clothesSize)){
-                clothesList.remove(clothesList.get(i));
-                clothesList.add(0, clothes);
-            }
-        }
-        return clothesList;
-    }
 
     public List<History> filterListByDate(List<History> arrivalList, LocalDate date) {
 
@@ -74,5 +56,30 @@ public class FilterList {
         }
 
         return new HashSet<>(stringList);
+    }
+
+    public List<Stock> filterByStock(List<Stock> stockList, String filter){
+
+        List<Stock> newList = new ArrayList<>();
+        String newFilter = filter.toUpperCase();
+
+        for (Stock value: stockList){
+            if (value.getClothesName().equals(newFilter)){
+                newList.add(value);
+            }else {
+                if (value.getClothesBrand().equals(newFilter)){
+                    newList.add(value);
+                }else {
+                    if (value.getClothesSize().equals(newFilter)){
+                        newList.add(value);
+                    }else {
+                        if (value.getClothesColor().equals(newFilter)){
+                            newList.add(value);
+                        }
+                    }
+                }
+            }
+        }
+        return newList;
     }
 }

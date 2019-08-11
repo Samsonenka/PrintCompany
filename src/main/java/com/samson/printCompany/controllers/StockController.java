@@ -21,14 +21,14 @@ import java.util.*;
 public class StockController {
 
     @Autowired
-    private StockRepo clothesRepo;
+    private StockRepo stockRepo;
     @Autowired
     private HistoryRepo historyRepo;
 
     @GetMapping("/showAll")
     public String showClothes(ModelMap modelMap){
 
-        modelMap.put("clothes", clothesRepo.findAll());
+        modelMap.put("clothes", stockRepo.findAll());
 
         return "stock";
     }
@@ -40,24 +40,27 @@ public class StockController {
 
         Stock stock = new Stock(clothesName, clothesBrand, clothesSize, clothesColor, clothesQuantity);
 
-        Stock newClothes = stock.addClothes(clothesRepo.findAll());
+        Stock newClothes = stock.addClothes(stockRepo.findAll());
         History history = new History(stock, Status.arrival.toString());
 
         historyRepo.save(history);
-        clothesRepo.save(newClothes);
+        stockRepo.save(newClothes);
 
-        modelMap.put("clothes", clothesRepo.findAll());
+        List<Stock> stockList = stockRepo.findAll();
+        Collections.reverse(stockList);
 
-        return "redirect:/clothes/showAll";
+        modelMap.put("clothes", stockList);
+
+        return "stock";
     }
 
     @GetMapping("/filter")
-    public String filterClothes(@RequestParam String clothesSize, ModelMap modelMap){
+    public String filterClothes(@RequestParam String filter, ModelMap modelMap){
 
         FilterList filterList = new FilterList();
-        List<Stock> clothesList = filterList.filterListBySize(clothesRepo.findAll(), clothesSize);
+        List<Stock> stockList = filterList.filterByStock(stockRepo.findAll(), filter);
 
-        modelMap.put("clothes", clothesList);
+        modelMap.put("clothes", stockList);
 
         return "stock";
     }

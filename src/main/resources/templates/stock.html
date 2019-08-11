@@ -89,13 +89,7 @@
             </div>
             <div class="modal-body">
                 <form th:action="@{/clothes/filter}" method="get">
-                    <select name="clothesSize" class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                        <option selected>Wybierz rozmiar</option>
-                        <option th:each="size : ${size}"
-                                th:value="${size}"
-                                th:utext="${size}">
-                        </option>
-                    </select>
+                    <div class="my-2"><input required  type="text" name="filter" class="form-control" placeholder="Kategorie, Marka, Rozmiar, Сolor" aria-describedby="button-addon2"/></div>
                     <button  class="btn btn-primary my-2" type="submit">Ok</button>
                 </form>
             </div>
