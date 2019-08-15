@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class PricePrints {
@@ -41,5 +42,16 @@ public class PricePrints {
 
     public void setColorPrint(String colorPrint) {
         this.colorPrint = colorPrint;
+    }
+
+    public PricePrints addPrice(List<PricePrints> all) {
+
+        for (PricePrints value: all){
+            if (value.getColorPrint().equals(colorPrint)){
+                value.setPricePrint(pricePrint);
+                return value;
+            }
+        }
+        return this;
     }
 }

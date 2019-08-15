@@ -30,7 +30,9 @@ public class PriceManagementController {
 
         PricePrints price = new PricePrints(pricePrint, colorPrint);
 
-        pricePrintsRepo.save(price);
+        PricePrints newPrice = price.addPrice(pricePrintsRepo.findAll());
+
+        pricePrintsRepo.save(newPrice);
         modelMap.put("pricePrints", pricePrintsRepo.findAll());
 
         return "priceManagement";

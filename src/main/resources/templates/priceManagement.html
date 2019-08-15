@@ -29,6 +29,10 @@
     </div>
 </nav>
 
+<div class="text-center my-3 text-uppercase">
+    <h3>Lista cen</h3>
+</div>
+
 <div>
     <table class="table table-sm">
         <tr>
@@ -54,7 +58,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/PriceManagement/addPrice}" method="post">
+                <form th:action="@{/priceManagement/addPrice}" method="post">
                     <div class="my-2"><input required  type="text" name="colorPrint" class="form-control" placeholder="Color" aria-describedby="button-addon2"/></div>
                     <div class="my-2"><input required type="text" name="pricePrint" class="form-control" placeholder="Cena" aria-describedby="button-addon2"></div>
                     <button  class="btn btn-primary" type="submit">Dodaj</button>
