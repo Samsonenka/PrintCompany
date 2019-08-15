@@ -14,24 +14,56 @@
 </head>
 <body class="bg-light px-5 py-3">
 
-
 <nav class="navbar navbar-light bg-light border-bottom">
     <a class="navbar-brand" th:href="@{/}">
         <img th:src="@{'/img/logoprint.png'}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Print Company
     </a>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#addPrice" data-whatever="@mdo">Dodaj cene</button>
+        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/history/showAll';return false;">Historia operacji</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/orders/showAll';return false;">Lista zamówień</button>
+        <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/clothes/showAll';return false;">Magazyn</button>
+
+    </div>
 </nav>
 
-<form th:action="@{/clothes/add}" method="post">
-    <div class="my-2"><input required  type="text" name="pricePrint" class="form-control" placeholder="Cena" aria-describedby="button-addon2"/></div>
-    <select name="clothesOrderColor" class="custom-select my-1" required>
-        <option selected>Wybierz color</option>
-        <option th:each="colorPrint : ${colorPrint}"
-                th:value="${colorPrint}"
-                th:utext="${colorPrint}">
-        </option>
-    </select>
-    <button  class="btn btn-primary" type="submit">Ok</button>
-</form>
+<div>
+    <table class="table table-sm">
+        <tr>
+            <th scope="col">Color</th>
+            <th scope="col">Cena</th>
+        </tr>
+        <tr scope="col" th:each ="pricePrints : ${pricePrints}">
+            <td th:utext="${pricePrints.colorPrint}">...</td>
+            <td th:utext="${pricePrints.pricePrint}">...</td>
+        </tr>
+    </table>
+</div>
+
+<!--model addPrice-->
+<!--***************************************************-->
+<div class="modal fade" id="addPrice" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPriceLabel">Filtruj według rozmiaru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/PriceManagement/addPrice}" method="post">
+                    <div class="my-2"><input required  type="text" name="colorPrint" class="form-control" placeholder="Color" aria-describedby="button-addon2"/></div>
+                    <div class="my-2"><input required type="text" name="pricePrint" class="form-control" placeholder="Cena" aria-describedby="button-addon2"></div>
+                    <button  class="btn btn-primary" type="submit">Dodaj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--***************************************************-->
 
 </body>
 </html>

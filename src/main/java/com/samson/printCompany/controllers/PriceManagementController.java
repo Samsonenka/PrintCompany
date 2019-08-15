@@ -1,19 +1,37 @@
 package com.samson.printCompany.controllers;
 
-import com.samson.printCompany.models.enums.ColorPrint;
+import com.samson.printCompany.models.PricePrints;
+import com.samson.printCompany.repos.PricePrintsRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/PriceManagement")
+@RequestMapping("/priceManagement")
 public class PriceManagementController {
 
-    @GetMapping("/edit")
-    public String editPrice(ModelMap modelMap){
+    @Autowired
+    PricePrintsRepo pricePrintsRepo;
 
-        modelMap.put("colorPrint", ColorPrint.values());
+    @GetMapping("/showPrice")
+    public String showPrice(ModelMap modelMap){
+
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
+
+        return "priceManagement";
+    }
+
+    @PostMapping("/addPrice")
+    public String addPrice(@RequestParam double pricePrint, @RequestParam String colorPrint, ModelMap modelMap){
+
+        PricePrints price = new PricePrints(pricePrint, colorPrint);
+
+        pricePrintsRepo.save(price);
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
 
         return "priceManagement";
     }
