@@ -69,7 +69,6 @@ public class OrderController {
         Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
         Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
 
-        String sumPrice = String.format("%.2f", clothesOrder.sumPrice());
         String sumPriceList = String.format("%.2f", clothesOrder.sumPriceList(clothesOrderList));
 
         modelMap.put("clothesOrder", clothesOrderList);
@@ -127,8 +126,8 @@ public class OrderController {
         return "showClothesOrder";
     }
 
-    @PostMapping("/deleteClothesOrder/{orderID}")
-    public String deleteClothesOrder(@PathVariable int orderID, ModelMap modelMap){
+    @PostMapping("/deleteOrder/{orderID}")
+    public String deleteOrder(@PathVariable int orderID, ModelMap modelMap){
 
         FilterList filterList = new FilterList();
 
@@ -141,6 +140,40 @@ public class OrderController {
         modelMap.put("orders", orderRepo.findAll());
 
         return "orders";
+    }
+
+    @GetMapping("/deleteClothesOrder/{clothesOrderID}/{orderID}")
+    public String deleteClothesOrder(@PathVariable int clothesOrderID, @PathVariable int orderID, ModelMap modelMap){
+
+        ClothesOrder clothesOrder = clothesOrderRepo.findById(clothesOrderID).get();
+        clothesOrderRepo.delete(clothesOrder);
+
+        Orders order = orderRepo.findById(orderID).get();
+
+        ClothesOrder newClothesOrder = new ClothesOrder();
+
+        FilterList filterList = new FilterList();
+        List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
+
+
+        Set<String> setName = filterList.removeReplaysName(stockRepo.findAll());
+        Set<String> setBrand = filterList.removeReplaysBrand(stockRepo.findAll());
+        Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
+        Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
+
+        String sumPriceList = String.format("%.2f", newClothesOrder.sumPriceList(clothesOrderList));
+
+        modelMap.put("newClothesOrder", clothesOrderList);
+        modelMap.put("order", order);
+        modelMap.put("name", setName);
+        modelMap.put("brand", setBrand);
+        modelMap.put("size", setSize);
+        modelMap.put("color", setColor);
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
+        modelMap.put("sumPrice", newClothesOrder);
+        modelMap.put("sumPriceList", sumPriceList);
+
+        return "showClothesOrder";
     }
 
     @GetMapping("/filter")

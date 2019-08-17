@@ -44,6 +44,7 @@
             <th scope="col">Ilość</th>
             <th scope="col">Cena</th>
             <th scope="col">Wartość netto</th>
+            <th scope="col">Usuń</th>
         </tr>
         <tr scope="col" th:each ="clothesOrder : ${clothesOrder}">
             <td th:utext="${clothesOrder.clothesOrderName}">...</td>
@@ -53,6 +54,11 @@
             <td th:utext="${clothesOrder.clothesOrderQuantity}">...</td>
             <td th:utext="${clothesOrder.clothesOrderPrice}">...</td>
             <td th:utext="${clothesOrder.sumPriceString()}">...</td>
+            <td>
+                <a th:href="@{'/orders/deleteClothesOrder/' + ${clothesOrder.clothesOrderID} + '/' + ${order.orderID}}">
+                    <img class="rowDiv" th:src="@{'/img/delete.png'}" width="30" height="30">
+                </a>
+            </td>
         </tr>
     </table>
 
@@ -143,7 +149,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Nie</button>
-                <form th:action="@{/orders/deleteClothesOrder/{orderID}(orderID=${order.orderID})}" method="post">
+                <form th:action="@{/orders/deleteOrder/{orderID}(orderID=${order.orderID})}" method="post">
                     <button type="submit" class="btn btn-light">Tak</button>
                 </form>
             </div>
