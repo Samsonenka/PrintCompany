@@ -4,7 +4,6 @@ import com.samson.printCompany.models.enums.Status;
 import com.samson.printCompany.repos.ClothesOrderRepo;
 import com.samson.printCompany.repos.HistoryRepo;
 import com.samson.printCompany.repos.StockRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +31,7 @@ public class ClothesOrder {
     private int clothesOrderQuantity;
 
     @NotNull
-    private double clothesOrderPrice;
+    private float clothesOrderPrice;
     @NotNull
     private int orderID;
 
@@ -41,13 +40,14 @@ public class ClothesOrder {
 
     public ClothesOrder(@NotNull String clothesOrderName, @NotNull String clothesOrderBrand,
                         @NotNull String clothesOrderSize, @NotNull String clothesOrderColor,
-                        @NotNull int clothesOrderQuantity, @NotNull int orderID) {
+                        @NotNull int clothesOrderQuantity, @NotNull float clothesOrderPrice,
+                        @NotNull int orderID) {
         this.clothesOrderName = clothesOrderName.toUpperCase();
         this.clothesOrderBrand = clothesOrderBrand.toUpperCase();
         this.clothesOrderSize = clothesOrderSize.toUpperCase();
         this.clothesOrderColor = clothesOrderColor.toUpperCase();
         this.clothesOrderQuantity = clothesOrderQuantity;
-        this.clothesOrderPrice = 0;
+        this.clothesOrderPrice = clothesOrderPrice;
         this.orderID = orderID;
     }
 
@@ -75,7 +75,7 @@ public class ClothesOrder {
         return clothesOrderQuantity;
     }
 
-    public double getClothesOrderPrice() {
+    public float getClothesOrderPrice() {
         return clothesOrderPrice;
     }
 
@@ -112,5 +112,26 @@ public class ClothesOrder {
         }
         stockRepo.save(stock);
         return false;
+    }
+
+    public String sumPriceString(){
+        return String.format("%.2f", sumPrice());
+    }
+
+    public float sumPrice() {
+
+        float sum = clothesOrderQuantity * clothesOrderPrice;
+
+        return sum;
+    }
+
+    public float sumPriceList(List<ClothesOrder> clothesOrderList) {
+
+        float sum = 0;
+
+        for (ClothesOrder value: clothesOrderList){
+            sum += value.sumPrice();
+        }
+        return sum;
     }
 }

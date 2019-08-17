@@ -2,10 +2,8 @@ package com.samson.printCompany.controllers;
 import com.samson.printCompany.logics.FilterList;
 import com.samson.printCompany.models.ClothesOrder;
 import com.samson.printCompany.models.Orders;
-import com.samson.printCompany.repos.ClothesOrderRepo;
-import com.samson.printCompany.repos.HistoryRepo;
-import com.samson.printCompany.repos.OrderRepo;
-import com.samson.printCompany.repos.StockRepo;
+import com.samson.printCompany.models.PricePrints;
+import com.samson.printCompany.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +26,9 @@ public class OrderController {
 
     @Autowired
     private HistoryRepo historyRepo;
+
+    @Autowired
+    private PricePrintsRepo pricePrintsRepo;
 
     @GetMapping("/showAll")
     public String showOrders(ModelMap modelMap){
@@ -57,13 +58,19 @@ public class OrderController {
 
         Orders order = orderRepo.findById(orderID).get();
 
+        ClothesOrder clothesOrder = new ClothesOrder();
+
         FilterList filterList = new FilterList();
         List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
+
 
         Set<String> setName = filterList.removeReplaysName(stockRepo.findAll());
         Set<String> setBrand = filterList.removeReplaysBrand(stockRepo.findAll());
         Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
         Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
+
+        String sumPrice = String.format("%.2f", clothesOrder.sumPrice());
+        String sumPriceList = String.format("%.2f", clothesOrder.sumPriceList(clothesOrderList));
 
         modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("order", order);
@@ -71,6 +78,9 @@ public class OrderController {
         modelMap.put("brand", setBrand);
         modelMap.put("size", setSize);
         modelMap.put("color", setColor);
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
+        modelMap.put("sumPrice", clothesOrder);
+        modelMap.put("sumPriceList", sumPriceList);
 
         return "showClothesOrder";
     }
@@ -78,14 +88,17 @@ public class OrderController {
     @PostMapping("/saveClothesOrder/{orderID}")
     public String saveClothesOrder(@PathVariable int orderID, @RequestParam String clothesOrderName,
                               @RequestParam String clothesOrderBrand, @RequestParam String clothesOrderSize,
-                              @RequestParam String clothesOrderColor, @RequestParam int clothesOrderQuantity,
+                              @RequestParam String clothesOrderColor, @RequestParam int printID, @RequestParam int clothesOrderQuantity,
                               ModelMap modelMap){
 
         Orders order = orderRepo.findById(orderID).get();
 
+        PricePrints pricePrints = pricePrintsRepo.findById(printID).get();
+        float price = pricePrints.getPriceByColor(pricePrints.getColorPrint(), pricePrintsRepo.findAll());
+
         ClothesOrder clothesOrder = new ClothesOrder(clothesOrderName, clothesOrderBrand,
                                                         clothesOrderSize, clothesOrderColor,
-                                                            clothesOrderQuantity, orderID);
+                                                            clothesOrderQuantity, price, orderID);
 
         boolean isChange = clothesOrder.stockChange(stockRepo.findAll(), stockRepo, clothesOrderRepo, historyRepo);
 
@@ -97,6 +110,9 @@ public class OrderController {
         Set<String> setSize = filterList.removeReplaysSize(stockRepo.findAll());
         Set<String> setColor = filterList.removeReplaysColors(stockRepo.findAll());
 
+        String sumPrice = String.format("%.2f", clothesOrder.sumPrice());
+        String sumPriceList = String.format("%.2f", clothesOrder.sumPriceList(clothesOrderList));
+
         modelMap.put("order", order);
         modelMap.put("clothesOrder", clothesOrderList);
         modelMap.put("isChange", isChange);
@@ -104,6 +120,9 @@ public class OrderController {
         modelMap.put("brand", setBrand);
         modelMap.put("size", setSize);
         modelMap.put("color", setColor);
+        modelMap.put("pricePrintsRepo", pricePrintsRepo.findAll());
+        modelMap.put("sumPrice", sumPrice);
+        modelMap.put("sumPriceList", sumPriceList);
 
         return "showClothesOrder";
     }

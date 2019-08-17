@@ -13,22 +13,22 @@ public class PricePrints {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int priceID;
 
-    private double pricePrint;
+    private float pricePrint;
     private String colorPrint;
 
     public PricePrints() {
     }
 
-    public PricePrints(double price, String color) {
+    public PricePrints(float price, String color) {
         this.pricePrint = price;
-        this.colorPrint = color;
+        this.colorPrint = color.toUpperCase();
     }
 
     public int getPriceID() {
         return priceID;
     }
 
-    public double getPricePrint() {
+    public float getPricePrint() {
         return pricePrint;
     }
 
@@ -36,7 +36,7 @@ public class PricePrints {
         return colorPrint;
     }
 
-    public void setPricePrint(double pricePrint) {
+    public void setPricePrint(float pricePrint) {
         this.pricePrint = pricePrint;
     }
 
@@ -53,5 +53,15 @@ public class PricePrints {
             }
         }
         return this;
+    }
+
+    public float getPriceByColor(String colorPrintOrder, List<PricePrints> all) {
+
+        for (PricePrints value: all){
+            if (value.colorPrint.equals(colorPrintOrder)){
+                return value.pricePrint;
+            }
+        }
+        return 0;
     }
 }

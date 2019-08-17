@@ -26,7 +26,7 @@ public class PriceManagementController {
     }
 
     @PostMapping("/addPrice")
-    public String addPrice(@RequestParam double pricePrint, @RequestParam String colorPrint, ModelMap modelMap){
+    public String addPrice(@RequestParam float pricePrint, @RequestParam String colorPrint, ModelMap modelMap){
 
         PricePrints price = new PricePrints(pricePrint, colorPrint);
 

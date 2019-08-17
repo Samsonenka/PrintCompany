@@ -40,8 +40,10 @@
             <th scope="col">Kategorie</th>
             <th scope="col">Marka</th>
             <th scope="col">Rozmiar</th>
-            <th scope="col">Сolor</th>
+            <th scope="col">Kolor</th>
             <th scope="col">Ilość</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Wartość netto</th>
         </tr>
         <tr scope="col" th:each ="clothesOrder : ${clothesOrder}">
             <td th:utext="${clothesOrder.clothesOrderName}">...</td>
@@ -49,8 +51,15 @@
             <td th:utext="${clothesOrder.clothesOrderSize}">...</td>
             <td th:utext="${clothesOrder.clothesOrderColor}">...</td>
             <td th:utext="${clothesOrder.clothesOrderQuantity}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderPrice}">...</td>
+            <td th:utext="${clothesOrder.sumPriceString()}">...</td>
         </tr>
     </table>
+
+    <div class="text-right my-3 text-uppercase">
+        <h5 th:text="'Razem: ' + ${sumPriceList}"></h5>
+    </div>
+
     <button type="button" id="buttonAdd" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#addOrderModal" data-whatever="@mdo"></button>
     <button type="button" id="buttonDelete" class="btn btn-secondary rock rowDiv" data-toggle="modal" data-target="#deleteOrderModal"></button>
     <button type="button" id="buttonInfo" class="btn btn-secondary rock rowDiv" onclick="location.href='/orders/details';return false;"></button>
@@ -101,6 +110,13 @@
                         <option th:each="color : ${color}"
                                 th:value="${color}"
                                 th:utext="${color}">
+                        </option>
+                    </select>
+                    <select name="printID" class="custom-select my-1" required>
+                        <option selected>Wybierz kolor nadruku</option>
+                        <option th:each="pricePrints : ${pricePrints}"
+                                th:value="${pricePrints.priceID}"
+                                th:utext="${pricePrints.colorPrint}">
                         </option>
                     </select>
                     <div class="my-2"><input required type="text" name="clothesOrderQuantity" class="form-control" placeholder="Ilość" aria-describedby="button-addon2"></div>
