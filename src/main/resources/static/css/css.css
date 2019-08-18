@@ -54,3 +54,17 @@ a {
     color: #000 !important;
     text-decoration: none
 }
+
+.headline{
+    font-weight: bold;
+    background-color: darkgrey;
+    border-top: 2px solid black;
+}
+
+.endline{
+    border-bottom: 1px solid black;
+}
+
+.textbold{
+    font-weight: bold;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/css.css" />
+    <script src="/js/js.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body class="bg-light px-5 py-5">
+
+<div class="container text-uppercase">
+    <div class="row">
+        <div class="col text-center px-5">
+            <div>
+                <img th:src="@{'/img/logoprint.png'}" width="80" height="80" class="d-inline-block align-top mr-2" alt="">
+                <h6>Print Company</h6>
+            </div>
+        </div>
+        <div class="col text-center px-5">
+            <div>
+                <div class="headline">
+                    <a>Miejsce wystawienia:</a>
+                </div>
+                <a>Warszawa</a>
+            </div>
+            <div>
+                <div class="headline">
+                    <a>Data wystawienia:</a>
+                </div>
+                <div class="endline">
+                    <a th:text="${order.orderDate}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 text-uppercase">
+    <div class="row">
+        <div class="col text-center px-5">
+            <div>
+                <div class="headline">
+                    <a>Spzedawca:</a>
+                </div>
+                <div class="text-left textbold">
+                    <a>Print Company Sp.z o.o.</a>
+                    <br>
+                    <div class="endline">
+                        <a>Warszawa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col text-center px-5">
+            <div>
+                <div class="headline">
+                    <a>Nabywca:</a>
+                </div>
+                <div class="text-left textbold">
+                    <a th:text="${order.orderCompanyName}"></a>
+                    <br>
+                    <div class="endline">
+                        <a th:text="${order.orderCompanyAddress}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center my-3 text-uppercase">
+    <h5 th:text="'№ ' + ${order.orderNumber}"></h5>
+</div>
+
+<div class="px-5">
+    <table class="table table-sm">
+        <tr>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Marka</th>
+            <th scope="col">Rozmiar</th>
+            <th scope="col">Kolor</th>
+            <th scope="col">Ilość</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Wartość netto</th>
+        </tr>
+        <tr scope="col" th:each ="clothesOrder : ${clothesOrder}">
+            <td th:utext="${clothesOrder.clothesOrderName}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderBrand}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderSize}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderColor}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderQuantity}">...</td>
+            <td th:utext="${clothesOrder.clothesOrderPrice}">...</td>
+            <td th:utext="${clothesOrder.sumPriceString()}">...</td>
+        </tr>
+    </table>
+
+    <div class="container text-uppercase">
+        <div class="row">
+            <div class="col text-center px-5">
+                <div class="text-center">
+                    <div class="headline">
+                        <a>Uwagi do dokumentu:</a>
+                    </div>
+                </div>
+                <div class="endline">
+                    <a th:text="${order.orderComments}"></a>
+                </div>
+            </div>
+            <div class="col px-5 text-center">
+                <div class="headline">
+                    <a th:text="'Razem: ' + ${sumPriceList}"></a>
+                </div>
+                <div class="endline">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

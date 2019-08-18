@@ -119,7 +119,7 @@ public class OrderController {
         modelMap.put("brand", setBrand);
         modelMap.put("size", setSize);
         modelMap.put("color", setColor);
-        modelMap.put("pricePrintsRepo", pricePrintsRepo.findAll());
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
         modelMap.put("sumPrice", sumPrice);
         modelMap.put("sumPriceList", sumPriceList);
 
@@ -184,5 +184,26 @@ public class OrderController {
         modelMap.put("orders", orders);
 
         return "orders";
+    }
+
+    @PostMapping("/details/{orderID}")
+    public String showDetailsOrder(@PathVariable int orderID, ModelMap modelMap){
+
+        Orders order = orderRepo.findById(orderID).get();
+
+        ClothesOrder clothesOrder = new ClothesOrder();
+
+        FilterList filterList = new FilterList();
+        List<ClothesOrder> clothesOrderList = filterList.findClothesByOrderID(order, clothesOrderRepo.findAll());
+
+        String sumPriceList = String.format("%.2f", clothesOrder.sumPriceList(clothesOrderList));
+
+        modelMap.put("clothesOrder", clothesOrderList);
+        modelMap.put("order", order);
+        modelMap.put("pricePrints", pricePrintsRepo.findAll());
+        modelMap.put("sumPrice", clothesOrder);
+        modelMap.put("sumPriceList", sumPriceList);
+
+        return "details";
     }
 }
