@@ -27,7 +27,7 @@
 </nav>
 
 <div class="text-center my-3 text-uppercase">
-    <h3>Formacja zamówienia</h3>
+    <h3>Tworzenie zamówienia</h3>
 </div>
 
 <div class="text-center my-3 text-uppercase">
@@ -37,7 +37,7 @@
 <div>
     <table class="table table-sm">
         <tr>
-            <th scope="col">Kategorie</th>
+            <th scope="col">Kategoria</th>
             <th scope="col">Marka</th>
             <th scope="col">Rozmiar</th>
             <th scope="col">Kolor</th>
@@ -91,7 +91,7 @@
             <div class="modal-body">
                 <form th:action="@{/orders/saveClothesOrder/{orderID}(orderID=${order.orderID})}" method="post">
                     <select name="clothesOrderName" class="custom-select my-1" required>
-                        <option selected>Wybierz kategorie</option>
+                        <option selected>Wybierz kategoria</option>
                         <option th:each="name : ${name}"
                                 th:value="${name}"
                                 th:utext="${name}">
@@ -112,7 +112,7 @@
                         </option>
                     </select>
                     <select name="clothesOrderColor" class="custom-select my-1" required>
-                        <option selected>Wybierz color</option>
+                        <option selected>Wybierz kolor</option>
                         <option th:each="color : ${color}"
                                 th:value="${color}"
                                 th:utext="${color}">

@@ -20,7 +20,7 @@
     </a>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#addPrice" data-whatever="@mdo">Dodaj cene</button>
+        <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#addPrice" data-whatever="@mdo">Dodaj cenę</button>
         <button type="button" class="btn btn-secondary text-uppercase" data-toggle="modal" data-target="#filterModal" data-whatever="@mdo">Filtr</button>
         <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/history/showAll';return false;">Historia operacji</button>
         <button type="button" class="btn btn-secondary text-uppercase" onclick="location.href='/orders/showAll';return false;">Lista zamówień</button>
@@ -36,7 +36,7 @@
 <div>
     <table class="table table-sm">
         <tr>
-            <th scope="col">Color</th>
+            <th scope="col">Kolor</th>
             <th scope="col">Cena</th>
         </tr>
         <tr scope="col" th:each ="pricePrints : ${pricePrints}">

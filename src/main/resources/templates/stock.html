@@ -35,10 +35,10 @@
 <div>
     <table class="table table-sm">
         <tr>
-            <th scope="col">Kategorie</th>
+            <th scope="col">Kategoria</th>
             <th scope="col">Marka</th>
             <th scope="col">Rozmiar</th>
-            <th scope="col">Сolor</th>
+            <th scope="col">Kolor</th>
             <th scope="col">Ilość</th>
         </tr>
         <tr scope="col" th:each ="clothes : ${clothes}">
@@ -64,7 +64,7 @@
             </div>
                 <div class="modal-body">
                     <form th:action="@{/clothes/add}" method="post">
-                        <div class="my-2"><input required  type="text" name="clothesName" class="form-control" placeholder="Kategorie" aria-describedby="button-addon2"/></div>
+                        <div class="my-2"><input required  type="text" name="clothesName" class="form-control" placeholder="Kategoria" aria-describedby="button-addon2"/></div>
                         <div class="my-2"><input required type="text" name="clothesBrand" class="form-control" placeholder="Marka" aria-describedby="button-addon2"></div>
                         <div class="my-2"><input required type="text" name="clothesSize" class="form-control" placeholder="Rozmiar" aria-describedby="button-addon2"></div>
                         <div class="my-2"><input required type="text" name="clothesColor" class="form-control" placeholder="Color" aria-describedby="button-addon2"></div>
